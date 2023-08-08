@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -34,28 +28,26 @@ def plot_NPV_IRR_lifetime_years(capital_cost, operating_cost, years):
     lifetime = np.arange(1, years + 1)  
     npvs, irrs = compute_metrics_over_lifetime(lifetime, capital_cost, operating_cost)
     
-    plt.figure(figsize=(14, 6))
+    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
     
     # Plot NPV over lifetime
-    plt.subplot(1, 2, 1)
-    plt.plot(lifetime, npvs, '-o', color='b', label='NPV')
-    plt.axhline(0, color='black', linewidth=0.5)
-    plt.title(f'Net Present Value over {years} Years')
-    plt.xlabel('Lifetime (Years)')
-    plt.ylabel('NPV in EUR')
-    plt.grid(True)
+    axs[0].plot(lifetime, npvs, '-o', color='b', label='NPV')
+    axs[0].axhline(0, color='black', linewidth=0.5)
+    axs[0].set_title(f'Net Present Value over {years} Years')
+    axs[0].set_xlabel('Lifetime (Years)')
+    axs[0].set_ylabel('NPV in EUR')
+    axs[0].grid(True)
     
     # Plot IRR over lifetime
-    plt.subplot(1, 2, 2)
-    plt.plot(lifetime, np.array(irrs)*100, '-o', color='g', label='IRR')
-    plt.axhline(0, color='black', linewidth=0.5)
-    plt.title(f'Internal Rate of Return over {years} Years')
-    plt.xlabel('Lifetime (Years)')
-    plt.ylabel('IRR (%)')
-    plt.grid(True)
+    axs[1].plot(lifetime, np.array(irrs)*100, '-o', color='g', label='IRR')
+    axs[1].axhline(0, color='black', linewidth=0.5)
+    axs[1].set_title(f'Internal Rate of Return over {years} Years')
+    axs[1].set_xlabel('Lifetime (Years)')
+    axs[1].set_ylabel('IRR (%)')
+    axs[1].grid(True)
     
     plt.tight_layout()
-    st.pyplot()
+    st.pyplot(fig)
 
 # Streamlit UI
 st.title("NPV and IRR Calculator over Lifetime")
@@ -65,10 +57,3 @@ operating_cost = st.slider('Operating Cost (Annual):', min_value=1e9, max_value=
 years = st.slider('Lifetime (Years):', min_value=1, max_value=50, value=30)
 
 plot_NPV_IRR_lifetime_years(capital_cost, operating_cost, years)
-
-
-# In[ ]:
-
-
-
-
