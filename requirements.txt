@@ -1,0 +1,5 @@
+numpy
+matplotlib
+ipywidgets
+numpy_financial
+voila
