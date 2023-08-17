@@ -7,7 +7,7 @@ import numpy_financial as npf
 plt.switch_backend('Agg')
 
 # 定义年收入和WACC
-annual_revenue = 2.25e9  # in EUR
+annual_revenue = 2.2e9  # Updated value in EUR
 WACC = 0.1014
 
 def compute_NPV(capital_cost, operating_cost, revenue, discount_rate, years=30):
@@ -52,8 +52,9 @@ def plot_NPV_IRR_lifetime_years(capital_cost, operating_cost, years):
 # Streamlit UI
 st.title("NPV and IRR Calculator over Lifetime")
 
-capital_cost = st.slider('Capital Cost:', min_value=5e9, max_value=15e9, value=9.349e9, step=1e8)
-operating_cost = st.slider('Operating Cost (Annual):', min_value=1e9, max_value=3e9, value=1.6e9, step=1e7)
+# Updated default values for sliders
+capital_cost = st.slider('Capital Cost:', min_value=5e9, max_value=15e9, value=11.3502436e9, step=1e8)
+operating_cost = st.slider('Operating Cost (Annual):', min_value=1e9, max_value=3e9, value=1.18525428e9, step=1e7)
 years = st.slider('Lifetime (Years):', min_value=1, max_value=50, value=30)
 
 plot_NPV_IRR_lifetime_years(capital_cost, operating_cost, years)
